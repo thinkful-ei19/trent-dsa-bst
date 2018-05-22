@@ -151,23 +151,53 @@ class BinarySearchTree {
 
 function main() {
   const BST = new BinarySearchTree();
-//   const arr = [3,1,4,6,9,2,5,7];
-//   arr.forEach(num => BST.insert(num));
+  //   const arr = [3,1,4,6,9,2,5,7];
+  //   arr.forEach(num => BST.insert(num));
 
   BST.insert(3);
+  BST.insert(5);
   BST.insert(1);
-  BST.insert(4);
   BST.insert(6);
   BST.insert(9);
   BST.insert(2);
   BST.insert(5);
   BST.insert(7);
 
-//   console.log(BST);
+  //   console.log(BST);
 
-//   console.log(BST.find(4));
+  //   console.log(BST.find(4));
 
-  console.log(findHeight(BST));
+  //   console.log(findHeight(BST));
+  const fake = {
+    key: 3,
+    left: {
+      key: 1,
+      left: null,
+      right: {
+        key: 2,
+        left: null,
+        right: null
+      }
+    },
+    right: {
+      key: 5,
+      left: {
+        key: 8,
+        left: null,
+        right: null
+      },
+      right: {
+        key: 7,
+        left: null,
+        right: null
+      }
+    },
+  };
+  //   BST.right.left = 20;
+  
+  //   console.log(BST);
+//   console.log(isItBst(fake));
+  console.log(thirdLargestNode(BST));
 }
 
 main();
@@ -184,3 +214,33 @@ function findHeight(bst) {
   }
 }
 
+function isItBst(bst) {
+  if (!bst.left && !bst.right) {
+    return true;
+  }
+  // cant get this last recursive case to work how I want it to
+  if (bst.left && bst.right) {
+    isItBst(bst.left);
+    return isItBst(bst.right);
+  }
+  if (bst.left) {
+    if (bst.left.key > bst.key) {
+      return false;
+    }
+    return isItBst(bst.left); 
+  }
+  if (bst.right) {
+    if (bst.right.key < bst.key) {
+      return false;
+    }
+    return isItBst(bst.right); 
+  }
+}
+
+function thirdLargestNode(bst) {
+  if (bst) {
+    thirdLargestNode(bst.left);
+    
+    thirdLargestNode(bst.right);
+  }
+}
