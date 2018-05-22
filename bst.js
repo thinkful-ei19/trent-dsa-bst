@@ -151,18 +151,36 @@ class BinarySearchTree {
 
 function main() {
   const BST = new BinarySearchTree();
-  const arr = [3,1,4,6,9,2,5,7];
-  arr.forEach(num => BST.insert(num));
+//   const arr = [3,1,4,6,9,2,5,7];
+//   arr.forEach(num => BST.insert(num));
+
+  BST.insert(3);
+  BST.insert(1);
+  BST.insert(4);
+  BST.insert(6);
+  BST.insert(9);
+  BST.insert(2);
+  BST.insert(5);
+  BST.insert(7);
 
 //   console.log(BST);
 
-  console.log(BST.find(4));
+//   console.log(BST.find(4));
+
+  console.log(findHeight(BST));
 }
 
 main();
 
 function findHeight(bst) {
   if (bst === null) {
-    
+    return 0;
+  }
+  else if (!bst.left && !bst.right) {
+    return 1;
+  }
+  else if (bst.left || bst.right) {
+    return Math.max(findHeight(bst.left), findHeight(bst.right)) + 1;
   }
 }
+
